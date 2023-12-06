@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Crop Recommendation</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+  <style>
+    body {
+      background-color:#051622; 
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color:whitesmoke; 
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .form-control {
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .btn {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    h4 {
+      color: #007BFF;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Crop Recommendation</h1>
+    <form method="post" action="{{url_for('predict')}}" >
+      <input type="text" name="nitro" placeholder="Enter Nitrogen Value" class="form-control" required>
+      <input type="text" name="phosporous" placeholder="Enter Phosphorous Value" class="form-control" required>
+      <input type="text" name="potassium" placeholder="Enter Potassium Value" class="form-control" required>
+      <input type="text" name="temp" placeholder="Enter Temperature" class="form-control" required>
+      <input type="text" name="humid" placeholder="Enter Humidity in %" class="form-control" required>
+      <input type="text" name="ph" placeholder="Enter pH value" class="form-control" required>
+      <input type="text" name="rainfall" placeholder="Enter rainfall value" class="form-control" required>
+
+      <select name="soiltype" class="form-control" required>
+        <option value="">Select Soil Type</option>
+        <option value="0">Black</option>
+        <option value="1">Clayey</option>
+        <option value="2">Loamy</option>
+        <option value="3">Red</option>
+        <option value="4">Sandy</option>
+      </select>
+
+      <select name="weather" class="form-control" required>
+        <option value="">Select Weather</option>
+        <option value="0">Cloudy</option>
+        <option value="1">Rainy</option>
+        <option value="2">Sunny</option>
+      </select>
+
+      <select name="location" class="form-control" required>
+        <option value="">Select District</option>
+        <option value="0">Ananthapur</option>
+        <option value="1">Chittoor</option>
+        <option value="2">East Godavari</option>
+        <option value="3">Guntur</option>
+        <option value="4">Krishna</option>
+        <option value="5">Kurnool</option>
+        <option value="6">Prakasam</option>
+        <option value="7">Nellore</option>
+        <option value="8">Visakhapatnam</option>
+        <option value="9">West Godavari</option>
+      </select>
+
+      <button type="submit" class="btn form-control">Predict Ideal Crop</button>
+    </form>
+    
+  </div>
+  <h2 style="color: #4CAF50; font-size: 2em; background-color: 
+  #333; padding: 15px; border-radius: 10px; margin-top: 20px;">
+   {{prediction_text}}
+   </h2>
+</body>
+
+</html>
